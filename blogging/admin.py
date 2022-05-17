@@ -1,6 +1,6 @@
 from django.contrib import admin
-from blogging.models import Post
-from blogging.models import Category
+from blogging.models import Post, PostAdmin
+from blogging.models import Category, CategoryAdmin
 
-admin.site.register(Post)
-admin.site.register(Category)
+admin.site.register(Post, PostAdmin)
+admin.site.register(Category, CategoryAdmin)
