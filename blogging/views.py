@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import loader
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from blogging.models import Post
 
 def stub_view(request, *args, **kwargs):
@@ -12,16 +14,6 @@ def stub_view(request, *args, **kwargs):
         body += "Kwargs:\n"
         body += "\n".join(["\t%s: %s" % i for i in kwargs.items()])
     return HttpResponse(body, content_type="text/plain")
-
-'''
-def old_list_view(request):
-    published = Post.objects.exclude(published_date__exact=None)
-    posts = published.order_by('-published_date')
-    template = loader.get_template('blogging/list.html')
-    context = {'posts': posts}
-    body = template.render(context)
-    return HttpResponse(body, content_type="text/html")
-'''
 
 def list_view(request):
     published = Post.objects.exclude(published_date__exact=None)
@@ -37,3 +29,21 @@ def detail_view(request, post_id):
         raise Http404
     context = {'post': post}
     return render(request, 'blogging/detail.html', context)
+
+class BlogListView(ListView):
+    model = Post
+    template_name = 'blogging/list.html'
+    context_object_name = 'posts'
+    queryset = Post.objects.order_by('-published_date').exclude(published_date__exact=None)
+
+class BlogDetailView(DetailView):
+    model = Post
+    template_name = 'blogging/detail.html'
+
+    def post(self, request, *args, **kwargs):
+        try:
+            post = self.get_object()
+        except Post.DoesNotExist:
+            raise Http404
+        context = {'post': post}
+        return render(request, 'blogging/detail.html', context)
