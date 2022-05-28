@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import loader
@@ -33,8 +34,11 @@ def detail_view(request, post_id):
 class BlogListView(ListView):
     model = Post
     template_name = 'blogging/list.html'
-    context_object_name = 'posts'
     queryset = Post.objects.order_by('-published_date').exclude(published_date__exact=None)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = self.get_queryset()
+        return context
 
 class BlogDetailView(DetailView):
     model = Post
