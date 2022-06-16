@@ -1,7 +1,18 @@
 {% extends "base.html" %}
+{% load socialaccount %}
 
 {% block content %}
 <h1>My Blog Login</h1>
+<p>
+  Please sign in with your existing account below or a third party service like GitHub: <br>
+    <a href="{% provider_login_url 'github' %}">Github Sign Up</a>
+</p>
+
+<br>
+<p>
+  Site Login
+</p>
+
 <form action="" method="POST">{% csrf_token %}
   {{ form.as_p }}
   <p><input type="submit" value="Log In"></p>
