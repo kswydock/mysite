@@ -125,16 +125,14 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-SITE_ID = 2
+SITE_ID = 1
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "accounts/login/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = "/static/"
-
-LOGIN_URL = "accounts/login/"
-LOGIN_REDIRECT_URL = "/"
