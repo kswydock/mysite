@@ -38,12 +38,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
-
-    "allauth", # new
-    "allauth.account", # new
-    "allauth.socialaccount", # new
-    "allauth.socialaccount.providers.github", # new
-
+    "allauth",  # new
+    "allauth.account",  # new
+    "allauth.socialaccount",  # new
+    "allauth.socialaccount.providers.github",  # new
     "polling",
     "blogging",
 ]
@@ -129,9 +127,9 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 2
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
